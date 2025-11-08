@@ -28,7 +28,7 @@ class CodeRoastServiceTest {
 
   @Test
   void testSubmitCode() {
-    // Given
+    // Arrange
     String code = "public class Test {}";
     String language = "java";
     CodeSnippet savedSnippet = new CodeSnippet(code, language);
@@ -38,10 +38,10 @@ class CodeRoastServiceTest {
 
     when(repository.save(any(CodeSnippet.class))).thenReturn(savedSnippet);
 
-    // When
+    // Act
     CodeSnippet result = service.submitCode(code, language);
 
-    // Then
+    // Assert
     assertNotNull(result);
     assertEquals(1L, result.getId());
     assertEquals(code, result.getCode());
@@ -53,34 +53,34 @@ class CodeRoastServiceTest {
 
   @Test
   void testGetAllSnippets() {
-    // Given
+    // Arrange
     CodeSnippet snippet1 = new CodeSnippet("code1", "java");
     CodeSnippet snippet2 = new CodeSnippet("code2", "python");
     List<CodeSnippet> snippets = Arrays.asList(snippet1, snippet2);
 
     when(repository.findAll()).thenReturn(snippets);
 
-    // When
+    // Act
     List<CodeSnippet> result = service.getAllSnippets();
 
-    // Then
+    // Assert
     assertEquals(2, result.size());
     verify(repository, times(1)).findAll();
   }
 
   @Test
   void testGetSnippetById() {
-    // Given
+    // Arrange
     Long id = 1L;
     CodeSnippet snippet = new CodeSnippet("code", "java");
     snippet.setId(id);
 
     when(repository.findById(id)).thenReturn(Optional.of(snippet));
 
-    // When
+    // Act
     Optional<CodeSnippet> result = service.getSnippetById(id);
 
-    // Then
+    // Assert
     assertTrue(result.isPresent());
     assertEquals(id, result.get().getId());
     verify(repository, times(1)).findById(id);
@@ -88,15 +88,15 @@ class CodeRoastServiceTest {
 
   @Test
   void testGetSnippetByIdNotFound() {
-    // Given
+    // Arrange
     Long id = 1L;
 
     when(repository.findById(id)).thenReturn(Optional.empty());
 
-    // When
+    // Act
     Optional<CodeSnippet> result = service.getSnippetById(id);
 
-    // Then
+    // Assert
     assertFalse(result.isPresent());
     verify(repository, times(1)).findById(id);
   }
