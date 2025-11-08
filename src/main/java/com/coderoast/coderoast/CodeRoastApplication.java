@@ -1,0 +1,12 @@
+package com.coderoast.coderoast;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CodeRoastApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(CodeRoastApplication.class, args);
+  }
+}

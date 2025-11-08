@@ -1,0 +1,8 @@
+# Package Files #
+*.jar
+
+# Maven
+target/
+
+# VS Code
+.vscode/
